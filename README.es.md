@@ -1,6 +1,7 @@
 # Spec-Driven Mobile Development (SDMD)
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Validación](https://github.com/omarSanOc/spec-driven-mobile-development/actions/workflows/validate.yml/badge.svg)](https://github.com/omarSanOc/spec-driven-mobile-development/actions/workflows/validate.yml)
 ![Agent Skills](https://img.shields.io/badge/Agent_Skills-SKILL.md-black)
 ![Plataformas](https://img.shields.io/badge/Android%20%C2%B7%20iOS%20%C2%B7%20KMP%20%C2%B7%20Flutter%20%C2%B7%20React%20Native-green)
 
