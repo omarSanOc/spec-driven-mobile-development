@@ -1,0 +1,54 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  skill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10
+        with:
+          version: latest-known
+
+      - name: Validate Agent Skills format
+        run: uvx --from skills-ref agentskills validate skills/spec-driven-mobile-development
+
+      - name: Validate manifests and version consistency
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          skill = Path("skills/spec-driven-mobile-development/SKILL.md").read_text()
+          match = re.search(r'^  version: "([^"]+)"$', skill, re.MULTILINE)
+          if not match:
+              raise SystemExit("SKILL.md metadata.version is missing")
+
+          expected = match.group(1)
+          plugin = json.loads(Path(".claude-plugin/plugin.json").read_text())
+          marketplace = json.loads(Path(".claude-plugin/marketplace.json").read_text())
+          versions = {
+              "SKILL.md": expected,
+              "plugin.json": plugin.get("version"),
+              "marketplace.json": marketplace["plugins"][0].get("version"),
+          }
+
+          if len(set(versions.values())) != 1:
+              raise SystemExit(f"Version mismatch: {versions}")
+
+          source = marketplace["plugins"][0]["source"]
+          if not (Path(".") / source / ".claude-plugin/plugin.json").is_file():
+              raise SystemExit(f"Marketplace source does not contain plugin.json: {source}")
+
+          print(f"Validated version {expected}")
+          PY
