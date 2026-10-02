@@ -105,6 +105,10 @@ build-ios:   flutter build ios --no-codesign --dart-define-from-file=env/dev.jso
 | AC-07 | — | iOS | BLOCKED | No physical iOS device; simulator has no VoiceOver |
 | AC-08 | Cubit test with fake clock | Shared | PASSED | |
 
+## Release items outside the repository
+
+None (store declarations unchanged).
+
 ## Open items
 
 - **AC-07 · iOS:** on a physical iPhone with VoiceOver on, submit an invalid

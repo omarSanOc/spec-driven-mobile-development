@@ -59,6 +59,10 @@ inherits their lifecycles, back behavior and safe areas.
   `./gradlew :androidApp:assembleDebug`.
 - Some platform APIs (e.g. Keychain) are not available to Kotlin/Native test
   binaries without an app host; verify those by running the app.
+- Release-build check: the Android app's R8 rules must keep what shared code
+  needs (kotlinx.serialization usually ships its rules — verify), and the iOS
+  framework is linked in release mode (`linkReleaseFramework…`) with
+  optimizations. Follow `android.md` and `ios.md` for running each release build.
 
 ## Pitfalls to flag
 

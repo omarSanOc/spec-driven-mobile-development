@@ -11,7 +11,7 @@
       "name": "spec-driven-mobile-development",
       "source": "./",
       "description": "Turn new requirements into an approved SPEC, PLAN and TASKS before writing code, then implement and validate with per-platform evidence. Android, iOS, KMP, Flutter and React Native.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": {
         "name": "Omar Sánchez"
       },

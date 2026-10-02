@@ -11,7 +11,8 @@
 - Reference only verified paths; label new paths as proposed.
 - Keep shared code shared; justify every descent into platform-specific code
   and plan every target platform's side in the same change.
-- Reference FR/AC/D by ID instead of copying the SPEC.
+- Reference FR/AC/D by ID instead of copying the SPEC. Delete lines that do
+  not apply instead of filling them with N/A.
 - If a decision changes behavior or scope, go back to the SPEC and ask.
 - Keep these comments. Do not implement during planning. Approval of this plan
   is not an authorization to implement.
@@ -70,9 +71,14 @@ modules, per-target code: justification and every target's implementation.
 
 <!-- None by default. Any addition: purpose, alternatives considered, proof it
 supports every target, where it is declared. Requires the user's decision.
-Permissions, manifest/Info.plist entries, privacy declarations, environments. -->
+Permissions, manifest/Info.plist entries, environments; keep/ProGuard rules
+when minification is on. -->
 
 - [PENDING]
+
+**Store declarations to update:** <!-- from the SPEC: Play Data safety and
+permission declarations, App Store privacy labels, privacy manifest (in repo).
+Console forms become release items in TASKS. --> [None or list]
 
 ## Validation strategy
 
@@ -88,6 +94,11 @@ named in the SPEC; fakes at the boundaries; where they live. --> [PENDING]
 **Verified build and test commands (one per affected target):** [PENDING]
 
 **Device / emulator / simulator checks:** [PENDING]
+
+**Release-build check:** <!-- Required when the feature touches serialization,
+reflection, code generation, native code, build configuration, or adds/updates
+a library (see evidence-rules.md). Which variant, which targets, and the path
+through the app to exercise. --> [Required: … | Not required: reason]
 
 **Environment limitations:** [what cannot be checked here and how it stays open]
 

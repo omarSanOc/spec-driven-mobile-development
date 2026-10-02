@@ -30,6 +30,7 @@
 
 ```bash
 # one build command per target platform · unit tests (per target) · lint
+# release build per affected target, when the PLAN requires the release-build check
 ```
 
 ---
@@ -59,6 +60,15 @@ one row per criterion. -->
 | AC-01 | | [target platform] | NOT RUN | |
 
 <!-- Result: PASSED | FAILED | NOT RUN | BLOCKED (reason) -->
+
+## Release items outside the repository
+
+<!-- Store console forms and settings the agent cannot change or verify
+(e.g. Google Play Data safety, permission declarations, App Store privacy
+labels). NOT RUN until the user confirms they were done; then PASSED
+(confirmed by the user, date). Delete the section if there are none. -->
+
+- [ ] [PENDING]
 
 ## Open items
 

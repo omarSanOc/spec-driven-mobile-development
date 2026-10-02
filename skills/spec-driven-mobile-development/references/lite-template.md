@@ -8,14 +8,15 @@
 **Implementation authorized:** No <!-- date, or "No" -->
 
 <!-- FOR THE AGENT
-- Lite track only: one flow or screen, no new dependency, no new or changed
-  network contract, no persistence/schema change, no new permission, about five
-  tasks or fewer. If any condition stops holding, tell the user and move to the
+- Lite track only: one flow or screen, no new dependency, no new network call
+  or contract change, no persistence/schema change, no new permission, about
+  five tasks or fewer. If any condition stops holding, tell the user and move to the
   full track (SPEC/PLAN/TASKS), carrying over what was approved.
 - Same rules as the full track: verified / confirmed / proposed / PENDING; no
   code before explicit authorization; evidence per target platform.
-- Gate 1: approve Part 1. Gate 2: approve Part 2. Then ask separately for
-  authorization to implement. Keep these comments.
+- Gate 1: approve Part 1. Gate 2: approve Part 2 and authorize implementation
+  — one reply is enough if it says both explicitly. Present each gate with a
+  review summary (at most six bullets). Keep these comments.
 -->
 
 ## Part 1 · Spec
@@ -39,13 +40,15 @@
 ### Mobile behavior
 
 <!-- Only the rows of the mobile-guidelines table that this feature touches;
-list the rest in one line as N/A with the reason. -->
+list the rest in one line with the reason. -->
 
 | Situation | Expected behavior |
 | --- | --- |
 | [PENDING] | |
 
 **Not applicable:** [rows and reason]
+
+**Store declarations to update:** [None, or Play Data safety / App Store privacy labels: what changes]
 
 ### Acceptance criteria and how they are checked
 
@@ -83,6 +86,10 @@ list the rest in one line as N/A with the reason. -->
 | AC-01 | | [target platform] | NOT RUN | |
 
 <!-- Result: PASSED | FAILED | NOT RUN | BLOCKED (reason) -->
+
+### Release items outside the repository
+
+- [None, or e.g. "Update Play Data safety: add …" — NOT RUN until the user confirms]
 
 ### Open items
 

@@ -42,6 +42,13 @@ Info.plist, safe areas). Check the Flutter/Dart SDK constraints in
   (or `CupertinoApp`); `MediaQuery.platformBrightnessOf`.
 - **Platform look:** Material vs Cupertino widgets; adaptive constructors.
   Decide per requirement whether iOS should look native.
+- **Release build:** release mode is AOT-compiled, applies R8 to the Android
+  host and plugins, and with `--obfuscate` renames Dart symbols (breaks logic
+  based on `runtimeType.toString()` or enum/class names). `kDebugMode` /
+  `assert` code is gone. When evidence-rules requires it: `flutter build apk
+  --release` (or `flutter run --release`) and the iOS release build on macOS,
+  then exercise the feature's path. Store declarations follow `android.md` and
+  `ios.md`.
 
 ## Tests and commands
 

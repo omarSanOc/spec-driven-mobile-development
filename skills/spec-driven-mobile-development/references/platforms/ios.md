@@ -52,7 +52,14 @@ and testing iOS requires macOS with Xcode; if unavailable, those checks are BLOC
 - **Theming:** light/dark appearance (`colorScheme`, asset catalog colors with
   dark variants); a forced appearance (`UIUserInterfaceStyle`) if the app sets one.
 - **Background work:** BGTaskScheduler, background URLSession; strict limits.
-- **Privacy:** privacy manifest, required-reason APIs, App Store privacy labels.
+- **Privacy:** privacy manifest (`PrivacyInfo.xcprivacy`), required-reason
+  APIs, third-party SDK manifests and signatures; App Store privacy labels in
+  App Store Connect (a release item outside the repository).
+- **Release build:** the Release configuration compiles with optimizations and
+  without `DEBUG`-only code paths, and may use different xcconfig values or
+  entitlements. When evidence-rules requires it, build and run the Release
+  configuration (`xcodebuild -configuration Release` on a simulator, or an
+  archive/TestFlight build on a device) through the feature's path.
 
 ## Tests and commands
 

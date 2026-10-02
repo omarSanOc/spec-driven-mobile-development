@@ -14,6 +14,8 @@ requests are welcome in English or Spanish.
   changed). Link the official source in the PR.
 - **Examples** in `examples/` for other technologies. Mark them as fictional
   and keep them short.
+- **Before/after results** following [`benchmark/`](benchmark/README.md),
+  from real runs only.
 - **Reports from real use:** where the agent asked too much, too little, or got
   stuck. Include the agent and model, the stage, and the status line.
 

@@ -3,8 +3,8 @@
 Consider each point when writing the SPEC and apply the ones the feature
 touches. When a behavior is not defined, ask before assuming it. These points
 do not widen scope by themselves: only confirmed decisions become requirements
-and acceptance criteria. Points that do not apply are recorded as `N/A` with
-the reason.
+and acceptance criteria. Points that do not apply are listed in one line with
+the reason, not expanded.
 
 Define every point for **each target platform** (the platforms the app ships
 on, recorded in Stage 1). When there is more than one target and the expected
@@ -83,21 +83,34 @@ when that platform is a target.
   numbers, currency, units, right-to-left. System formatting can differ between
   platforms with the same locale; if a format must be identical, state it as a
   requirement.
-- **Store and release constraints.** When relevant: store review rules, privacy
-  declarations, minimum OS versions, staged rollout, forced update,
-  over-the-air update compatibility, compatibility with older app versions
-  still in use.
+- **Store and release constraints.** When relevant: store review rules,
+  minimum OS versions, staged rollout, forced update, over-the-air update
+  compatibility, compatibility with older app versions still in use.
+- **Store privacy declarations.** When the feature collects or shares a new
+  type of data (analytics events, identifiers, location, contacts, photos…),
+  adds or updates an SDK that does, or adds a permission, define which
+  declarations change for each target store: *Android:* Google Play **Data
+  safety** form and, for restricted permissions, the Play Console permission
+  declarations; *iOS:* App Store **privacy labels** and the privacy manifest
+  (`PrivacyInfo.xcprivacy`), including those of third-party SDKs. Console
+  forms live outside the repository: they become release items the user
+  completes, not tasks the agent can tick.
 - **Mobile validation.** Test the relevant scenarios (interruptions, reopening,
   connectivity changes, permissions, screen sizes, large text, dark mode).
+  When the feature touches serialization, reflection, code generation, native
+  code or adds/updates a library, also run the **release build** (see
+  `evidence-rules.md`): minification and optimizations break things that work
+  in debug.
   Complement automated tests with device, emulator or simulator checks. For
   each scenario, record which target platform it was verified on, and what
   stayed unverified for lack of environment (macOS, Xcode, simulator, device).
 
 ## Mobile behavior table (SPEC)
 
-This is the **single source** for the table in the SPEC. Copy the rows that
-apply; omit rows tagged with a platform that is not a target; keep the rest
-and write `N/A` with the reason when a row does not apply.
+This is the **single source** for the table in the SPEC. Copy **only the rows
+the feature touches**; omit rows tagged with a platform that is not a target;
+list the remaining rows in one line under the table with the reason
+(e.g. "Not applicable: no results, offline — no list and no network").
 
 | Situation | Expected behavior |
 | --- | --- |

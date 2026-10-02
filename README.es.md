@@ -36,7 +36,8 @@ ti **antes** de que exista código, y no da nada por terminado sin pruebas.
 - **Checklist móvil integrado.** Ciclo de vida, restauración de estado, conectividad, back, teclado, insets, modo oscuro, accesibilidad, permisos, privacidad: cada punto se decide o se marca N/A con su razón.
 - **Evidencia por plataforma.** Un build verde en Android no prueba nada de iOS. Lo que no se puede ejecutar se reporta como **BLOCKED**, nunca como aprobado.
 - **Tu proyecto manda.** Lee tu `AGENTS.md`, tus plantillas y guías, y se adapta a GitHub Spec Kit, Kiro u OpenSpec si ya los usas.
-- **Proporcional.** Un *track lite* (un documento, dos aprobaciones) para features pequeñas.
+- **Evidencia lista para release.** Cuando una feature toca serialización, reflexión o una librería nueva, el build de release (R8, optimizaciones) forma parte de la prueba. Las declaraciones de privacidad de las tiendas (Data safety de Google Play, etiquetas de privacidad de App Store) se señalan cuando cambian datos o permisos.
+- **Proporcional.** Un *track lite* (un solo documento) para features pequeñas, un modo *combinado* que aprueba PLAN y TASKS juntos, documentos que solo incluyen lo que aplica, y un resumen corto en cada aprobación para que revises lo importante en vez de aprobar a ciegas.
 
 ## Tecnologías soportadas
 
@@ -92,7 +93,7 @@ En cada turno el agente responde con una línea de estado y como máximo tres
 preguntas:
 
 ```
-SDMD · forgot-password · full · Stage 2 SPEC · SPEC.md Draft
+SDMD · forgot-password · full/step · Stage 2 SPEC · SPEC.md Draft
 ```
 
 Los documentos se guardan en `docs/features/<feature>/` (o en la convención que
@@ -110,11 +111,30 @@ docs/features/
 Para retomar después, pídele al agente que continúe la feature: lee el estado
 de los documentos y sigue donde te quedaste.
 
-## Ejemplo completo
+### Menos aprobaciones cuando las quieras
 
-[`examples/flutter-forgot-password/`](examples/flutter-forgot-password/): una
-app Flutter ficticia llevada por todas las etapas, incluida una verificación
-reportada como BLOCKED (el ejemplo está en inglés).
+| Tú dices | Qué pasa |
+| --- | --- |
+| nada (por defecto) | Apruebas SPEC → PLAN → TASKS → autorizas |
+| "Confío, ve directo a TASKS" | Apruebas la SPEC; PLAN y TASKS llegan juntos para una sola aprobación |
+| "Aprobado, implementa" | Aprobación y autorización en una sola respuesta |
+| un cambio pequeño solo de UI | El agente propone el track lite: un `FEATURE.md`, dos aprobaciones |
+
+La aprobación de la SPEC nunca se salta: ahí se toman las decisiones de producto.
+
+## Ejemplos (en inglés)
+
+- [`examples/flutter-forgot-password/`](examples/flutter-forgot-password/):
+  track completo; una app Flutter ficticia llevada por todas las etapas,
+  incluida una verificación reportada como BLOCKED.
+- [`examples/native-show-password-lite/`](examples/native-show-password-lite/FEATURE.md):
+  track lite; un cambio pequeño en apps nativas Android e iOS, en un solo documento.
+
+## ¿Realmente ayuda?
+
+En [`benchmark/`](benchmark/) hay un protocolo para construir la misma feature
+real con y sin la skill y comparar defectos, retrabajo, tiempo y costo. Ahí
+solo se publican resultados de corridas reales.
 
 ## FAQ
 
@@ -123,6 +143,9 @@ quedan como BLOCKED, con la verificación exacta que falta.
 
 **¿No es demasiado para un cambio pequeño?** Usa el track lite, o no uses la
 skill para arreglos de una línea: no está pensada para eso.
+
+**¿Demasiadas aprobaciones?** Pide el modo combinado, o aprueba y autoriza en
+una sola respuesta. Solo la aprobación de la SPEC se mantiene siempre.
 
 **Mi equipo ya escribe specs en otro formato.** Tus plantillas, IDs y carpetas
 tienen prioridad sobre los valores por defecto de la skill.

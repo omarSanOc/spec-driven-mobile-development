@@ -4,6 +4,40 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] — 2026-10-02
+
+Based on feedback from early users.
+
+### Changed
+
+- **Lighter `SKILL.md`** (about half the size): it keeps the stages, rules and
+  gates; Stage 1 in detail moved to `references/context-discovery.md`, and the
+  SPEC section list lives only in the template.
+- **Fewer, better approvals:** a *combined* approval mode (PLAN and TASKS
+  approved together), approval and authorization in one explicit reply, and
+  no sign-off question when every check passed. The SPEC gate always stays.
+  Every approval request comes with a review summary of at most six bullets.
+- **Shorter documents:** the SPEC includes only the mobile behavior rows and
+  sections that apply; the rest are listed in one line. The SPEC template
+  merges acceptance criteria with how they are checked.
+- Lite track: approval of Part 2 and authorization can come in one reply;
+  "no new network call" replaces "no new contract" as a condition.
+- Status line shows the approval mode (`full/step`, `full/combined`, `lite`).
+
+### Added
+
+- **Release-build check** in the evidence rules when a feature touches
+  serialization, reflection, code generation, native code, build configuration
+  or a new/updated library, with per-platform guidance (R8/ProGuard and
+  `mapping.txt` on Android, Release configuration on iOS, Flutter release and
+  obfuscation, React Native release bundle, KMP release framework).
+- **Store privacy declarations:** Google Play Data safety form and restricted
+  permission declarations next to App Store privacy labels and the privacy
+  manifest; console forms are tracked as release items outside the repository.
+- Lite-track example with native Android and iOS apps.
+- `benchmark/`: protocol and template to compare the same real feature with
+  and without the skill.
+
 ## [1.1.0] — 2026-09-30
 
 First public release.

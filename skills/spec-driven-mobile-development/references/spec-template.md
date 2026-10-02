@@ -12,9 +12,12 @@
 - Mark every statement as verified (cite path), confirmed (decision by the
   user), proposed, or PENDING. Never invent requirements or exclusions.
 - No class, table, file or algorithm design here: that belongs to PLAN.md.
+- Keep it proportional: delete sections marked (optional) that do not apply
+  and list them under "Not applicable" with the reason. Prefer tables and short
+  lines to prose. A reviewer should read it in about five minutes.
 - Per-platform rows and columns use the target platforms above only.
-- Keep it proportional to the feature. A complete document is not approved:
-  ask for approval explicitly. Do not implement during this stage.
+- A complete document is not approved: present the gate and ask explicitly.
+  Do not implement during this stage.
 -->
 
 ## Goal and users
@@ -31,24 +34,18 @@ that matter for this feature. No architecture design. -->
 
 [PENDING]
 
-## Design references
+## Design references (optional)
 
 <!-- Designs (Figma or other links), screenshots, design-system components to
-use. Say which screens or states have no design yet. N/A if the feature has no UI. -->
+use. Say which screens or states have no design yet. -->
 
 - [PENDING]
 
 ## In scope
 
 - **FR-01:** [PENDING]
-- **FR-02:** [PENDING]
 
-## Out of scope
-
-<!-- Only exclusions agreed with the user. Proposed exclusions go under
-"Decisions" until confirmed. -->
-
-- [PENDING]
+**Out of scope (agreed with the user only; proposed exclusions go to Decisions):** [PENDING]
 
 ## User flows
 
@@ -56,14 +53,14 @@ use. Say which screens or states have no design yet. N/A if the feature has no U
 
 1. [PENDING]
 
-## Business rules and data
+## Business rules and data (optional)
 
 <!-- Required fields, validations, limits, ordering, duplicates, calculations,
 roles and permissions. Meaning and behavior, not storage design. -->
 
 - [PENDING]
 
-## Error cases
+## Error cases (optional)
 
 <!-- Each case the user must be able to tell apart, and what they see and can
 do. Do not map messages 1:1 to HTTP status codes. -->
@@ -72,40 +69,40 @@ do. Do not map messages 1:1 to HTTP status codes. -->
 | --- | --- | --- |
 | [PENDING] | | |
 
-## Service contract
+## Service contract (optional — only if the feature uses a network)
 
-<!-- Only if the feature uses a network. Endpoints, request and response fields,
-error shapes, pagination, auth. Mark each item as verified (source) or assumed.
-Write N/A with reason otherwise. -->
+<!-- Endpoints, request and response fields, error shapes, pagination, auth.
+Mark each item as verified (source) or assumed. -->
 
-[N/A or PENDING]
+[PENDING]
 
-## Mobile behavior and alternative cases
+## Mobile behavior
 
-<!-- Copy the rows of the "Mobile behavior table" in mobile-guidelines.md (and
-the project's guidelines). Omit rows tagged with a non-target platform; omit
-the platform-differences row with a single target. Observable results, not
-mechanisms. Do not presume offline support or full state retention. -->
+<!-- Only the rows of the "Mobile behavior table" in mobile-guidelines.md (and
+the project's guidelines) that this feature touches. Rows that do not apply
+are not copied: list them in one line below with the reason. Observable
+results, not mechanisms. Do not presume offline support or state retention. -->
 
 | Situation | Expected behavior |
 | --- | --- |
-| Loading or action in progress | [PENDING] |
-| … (remaining rows from mobile-guidelines.md) | [PENDING] |
+| [PENDING] | |
 
-**Guideline points not applicable, and why:** [PENDING]
+**Rows and guideline points not applicable:** [list · reason]
 
-## Analytics and feature flags
+## Analytics, privacy and store declarations (optional)
 
-<!-- Only if the project uses them or the user asks. Event names, properties,
-consent; flag name, default and behavior when off. N/A with reason otherwise. -->
+<!-- Only if the feature emits analytics, collects or shares new data, adds an
+SDK, or adds a permission. Events and properties (no personal data unless the
+privacy policy allows it); feature flag name and default; which store
+declarations must change: Google Play Data safety form and permission
+declarations; App Store privacy labels and privacy manifest. -->
 
-[N/A or PENDING]
+[PENDING]
 
-## UI/UX suggestions (proposals)
+## UI/UX suggestions (optional)
 
-<!-- Improvements noticed while analysing: accessibility, empty/error states,
-feedback, copy, consistency with the design system. Each one is a proposal
-until the user confirms it; confirmed ones move to "In scope" as an FR. -->
+<!-- Improvements noticed while analysing. Each is a proposal until the user
+confirms it; confirmed ones become an FR. -->
 
 | # | Suggestion | Rationale | Status |
 | --- | --- | --- | --- |
@@ -114,27 +111,21 @@ until the user confirms it; confirmed ones move to "In scope" as an FR. -->
 ## Constraints
 
 <!-- Conditions already imposed by the user or the project rules: platforms,
-minimum OS, dependency policy, architecture boundaries, measurable performance
-or accessibility targets, required technology. Not the agent's preferences. -->
+minimum OS, dependency policy, architecture boundaries, measurable targets.
+Not the agent's preferences. -->
 
 - [PENDING]
 
-## Acceptance criteria
+## Acceptance criteria and how they are checked
 
-<!-- Observable results. Never "works correctly". Include agreed alternative cases. -->
+<!-- Observable results; never "works correctly". Include agreed alternative
+cases. Level: Unit (business/state logic) | Widget/UI | Device. Platform: target
+platform(s), or Shared for logic tests run on the development machine. Tools
+and commands go in PLAN.md. Do not mark criteria as passed here. -->
 
-- **AC-01 · FR-01:** Given [context], when [action], then [observable result].
-- **AC-02 · FR-02:** Given [context], when [action], then [observable result].
-
-## How each criterion is checked
-
-<!-- One row per criterion. Level: Unit (business/state logic) | UI | Device.
-Platform: one or more of the target platforms. Tools and commands go in PLAN.md.
-Do not mark criteria as passed during specification. -->
-
-| Criterion | Conditions and steps | Expected result | Level | Platform |
-| --- | --- | --- | --- | --- |
-| AC-01 | [PENDING] | [PENDING] | [PENDING] | [PENDING] |
+| Criterion | Given / when / then | Level | Platform |
+| --- | --- | --- | --- |
+| AC-01 · FR-01 | Given [context], when [action], then [observable result]. | [PENDING] | [PENDING] |
 
 ## Decisions
 
@@ -145,8 +136,15 @@ the recommendation. Write "None pending" when all are resolved. -->
 | --- | --- | --- | --- | --- |
 | D-01 | [PENDING] | | | Pending |
 
-<!-- BEFORE REQUESTING APPROVAL
+## Not applicable
+
+<!-- Sections removed and why, in one or two lines. -->
+
+[e.g. Service contract — no network · Analytics — the project has none]
+
+<!-- GATE CHECKLIST
 Scope and exclusions agreed; flows consistent; every FR has at least one AC;
-every AC has a check method and platform; applicable guideline points covered
-or N/A with reason; no PENDING left unless the user deferred it explicitly.
+every AC has a level and platform; applicable guideline points covered, the
+rest listed as not applicable; store declarations identified if data or
+permissions change; no PENDING left unless the user deferred it explicitly.
 -->

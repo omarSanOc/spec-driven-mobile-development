@@ -40,8 +40,7 @@ The cubit exposes `editing → submitting → success(email) | failure(type)`.
 
 ## Data and contracts
 
-- **Models and contracts:** request `{email}`; responses per SPEC "Service contract".
-- **Persistence / local vs remote / migrations:** N/A — nothing stored.
+- **Models and contracts:** request body is a plain map `{email}`; responses per SPEC "Service contract". Nothing is stored.
 
 ## State, operations and errors
 
@@ -57,7 +56,7 @@ The cubit exposes `editing → submitting → success(email) | failure(type)`.
 
 ## Dependencies and configuration
 
-- None.
+- None. **Store declarations:** no change (SPEC).
 
 ## Validation strategy
 
@@ -73,6 +72,8 @@ The cubit exposes `editing → submitting → success(email) | failure(type)`.
 | AC-08 | Cubit test with an injected clock | Shared | `flutter test` | Disabled at 59 s, enabled at 60 s |
 
 **Verified commands:** see `PROJECT_CONTEXT.md` → Commands.
+
+**Release-build check:** not required — no new library, no new serialized model (the body is a map, errors are mapped by hand), no build configuration change.
 
 **Environment limitations:** VoiceOver is not available in the iOS simulator; AC-07 on iOS needs a physical device.
 

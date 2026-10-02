@@ -1,6 +1,6 @@
 {
   "name": "spec-driven-mobile-development",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Spec-Driven Mobile Development (SDMD): turn new requirements into an approved SPEC, PLAN and TASKS, then implement and validate with per-platform evidence. Android, iOS, Kotlin Multiplatform, Flutter and React Native.",
   "author": {
     "name": "Omar Sánchez"

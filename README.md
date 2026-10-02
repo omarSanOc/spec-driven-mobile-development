@@ -36,7 +36,8 @@ call something done without proof.
 - **Mobile checklist built in.** Lifecycle, state restoration, connectivity, back, keyboard, insets, dark mode, accessibility, permissions, privacy — each one decided or marked N/A with a reason.
 - **Evidence per platform.** A green Android build proves nothing about iOS. Checks that cannot run are reported as **BLOCKED**, never as passed.
 - **Your project wins.** It reads your `AGENTS.md`, templates and guidelines, and adapts to GitHub Spec Kit, Kiro or OpenSpec if you already use them.
-- **Proportional.** A *lite track* (one document, two approvals) for small features.
+- **Release-ready evidence.** When a feature touches serialization, reflection or a new library, the release build (R8, optimizations) is part of the proof. Store privacy declarations — Google Play Data safety, App Store privacy labels — are flagged when data or permissions change.
+- **Proportional.** A *lite track* (one document) for small features, a *combined* mode that approves PLAN and TASKS together, documents that only include what applies, and a short review summary with every approval so you read what matters instead of rubber-stamping.
 
 ## Supported technologies
 
@@ -91,7 +92,7 @@ Figma frame if your agent can open them.
 The agent answers every turn with a status line and at most three questions:
 
 ```
-SDMD · forgot-password · full · Stage 2 SPEC · SPEC.md Draft
+SDMD · forgot-password · full/step · Stage 2 SPEC · SPEC.md Draft
 ```
 
 Documents land in `docs/features/<feature>/` (or your project's existing
@@ -109,11 +110,30 @@ docs/features/
 To resume later, just ask the agent to continue the feature; it reads the
 documents' status and picks up where you left off.
 
-## See a full example
+### Fewer approvals when you want them
 
-[`examples/flutter-forgot-password/`](examples/flutter-forgot-password/) — a
-fictional Flutter app taken through every stage, including a check reported as
-BLOCKED.
+| You say | What happens |
+| --- | --- |
+| nothing (default) | Approve SPEC → PLAN → TASKS → authorize |
+| "I trust you, go straight to TASKS" | Approve the SPEC; PLAN and TASKS come together for one approval |
+| "Approved, go ahead and implement" | Approval and authorization in one reply |
+| a small UI-only change | The agent proposes the lite track: one `FEATURE.md`, two approvals |
+
+The SPEC approval is never skipped: it is where product decisions are made.
+
+## Examples
+
+- [`examples/flutter-forgot-password/`](examples/flutter-forgot-password/) —
+  full track: a fictional Flutter app taken through every stage, including a
+  check reported as BLOCKED.
+- [`examples/native-show-password-lite/`](examples/native-show-password-lite/FEATURE.md) —
+  lite track: a small change in native Android and iOS apps, in one document.
+
+## Does it actually help?
+
+[`benchmark/`](benchmark/) has a protocol to build the same real feature with
+and without the skill and compare defects, rework, time and cost. Results are
+published there only from real runs.
 
 ## Repository layout
 
@@ -122,6 +142,7 @@ BLOCKED.
 ├── skills/spec-driven-mobile-development/
 │   ├── SKILL.md                     # the workflow the agent follows
 │   └── references/
+│       ├── context-discovery.md     # Stage 1 in detail
 │       ├── mobile-guidelines.md     # checklist + mobile behavior table
 │       ├── evidence-rules.md        # what counts as proof
 │       ├── spec-template.md · plan-template.md · tasks-template.md
@@ -129,6 +150,7 @@ BLOCKED.
 │       ├── project-context-template.md
 │       └── platforms/               # android · ios · kmp · flutter · react-native · _template
 ├── examples/
+├── benchmark/                       # before/after comparison protocol
 ├── .claude-plugin/                  # Claude Code plugin + marketplace manifest
 ├── INSTALL.md · CONTRIBUTING.md · CHANGELOG.md · LICENSE
 ```
@@ -140,6 +162,9 @@ recorded as BLOCKED with the exact check still needed.
 
 **Is it too heavy for a small change?** Use the lite track, or skip the skill
 for one-line fixes — it is not meant for those.
+
+**Too many approvals?** Ask for the combined mode, or approve and authorize in
+one reply. Only the SPEC approval always stays.
 
 **My team already writes specs in another format.** Your templates, IDs and
 folders win over the skill's defaults.

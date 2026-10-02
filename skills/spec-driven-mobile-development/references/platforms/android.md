@@ -52,6 +52,22 @@ the build files before relying on any API or platform default described here.
   color (Material You) only if the app already uses it.
 - **Background work:** WorkManager constraints, Doze, app standby.
 - **Backups:** `allowBackup` / data extraction rules decide what leaves the device.
+- **Release build (R8):** check `isMinifyEnabled` / `isShrinkResources` per
+  build type and the keep rules (`proguard-rules.pro`, libraries' consumer
+  rules). Minification breaks what works in debug: reflection-based
+  serialization (Gson, Moshi reflection, Firestore `toObject`, Jackson)
+  without `@SerializedName`/`@Keep` or keep rules, classes loaded by name,
+  enums parsed by name, generic types in Retrofit, JNI. When evidence-rules
+  requires it: `./gradlew :app:assembleRelease` (or a minified variant signed
+  with the debug key), install it, and run the feature's path; read the stack
+  trace with `mapping.txt` (`retrace`).
+- **Google Play declarations:** the **Data safety** form in Play Console must
+  reflect every data type the app (and its SDKs) collects or shares; update it
+  when the feature adds analytics, identifiers or a data-collecting SDK.
+  Restricted permissions need a Play Console declaration (e.g. background
+  location, SMS/Call log, all-files access, `QUERY_ALL_PACKAGES`, exact alarms,
+  foreground service types, photo and video access — check current Play
+  policy). These are release items outside the repository.
 
 ## Tests and commands
 
@@ -62,6 +78,7 @@ the build files before relying on any API or platform default described here.
 - Screenshot tests (Paparazzi, Roborazzi) only if already configured.
 - Typical commands (verify against the project): `./gradlew test`,
   `./gradlew testDebugUnitTest`, `./gradlew :app:assembleDebug`,
+  `./gradlew :app:assembleRelease` (or `bundleRelease`),
   `./gradlew connectedDebugAndroidTest`, `./gradlew lint`, plus ktlint/detekt/
   spotless if configured.
 
@@ -71,5 +88,7 @@ the build files before relying on any API or platform default described here.
 - One-off events modelled as state that replays after recreation.
 - Coroutines launched outside a lifecycle-aware scope (leaks, duplicate work).
 - Secrets in `BuildConfig` or `strings.xml` shipped in the APK.
+- A feature verified only in debug that touches serialization, reflection or a
+  new library (R8 can break it in release).
 - A release build pointing at a test environment.
 - A behavior verified on another platform and assumed on Android.

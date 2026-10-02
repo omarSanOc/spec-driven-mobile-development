@@ -45,6 +45,36 @@ is not evidence.
 | Analytics event sent with the right properties | Test with a fake analytics sink, or the analytics debug view | Code review alone |
 | Screen reader announcement | A person listening with TalkBack / VoiceOver, or an instrumented accessibility test | Semantics present in code |
 | Performance target | Measured value on a named device and build type | Impression |
+| Works in the build users get (minified, optimized) | Release build installed and the feature's path exercised, per affected target | Debug build, or a release build that was only compiled |
+| Store declaration updated (Play Data safety, App Store privacy labels) | The user confirms it was submitted (date) | The agent's statement |
+
+## Release builds
+
+Debug builds hide failures that only appear when code is minified, obfuscated
+or optimized: classes removed or renamed by R8/ProGuard, reflection-based
+serialization losing field names, code paths behind `DEBUG` flags, a JS bundle
+instead of a dev server. The **release-build check** is required when the
+feature:
+
+- adds or changes models that are serialized or deserialized (JSON, Firestore,
+  Room/Core Data entities, Parcelable/Codable via reflection);
+- uses reflection, annotation processing or code generation;
+- adds or updates a library or SDK (Firebase, analytics, payments, maps…);
+- adds native code or native modules (JNI, platform channels, Turbo Modules);
+- changes build configuration (flavors, minification, keep rules, Info.plist
+  or manifest entries).
+
+The check: build the release variant of each affected target (or the closest
+non-debuggable, minified variant signed with a debug key), install it, and
+exercise the feature's path, including one error path. Record the variant and
+the device. Each platform file says how. If signing or the toolchain is not
+available, the check is BLOCKED, not skipped.
+
+## Release items outside the repository
+
+Store console forms (Play Data safety, permission declarations, App Store
+privacy labels) cannot be changed or verified by the agent. List them in
+TASKS; they stay NOT RUN until the user confirms they were submitted.
 
 ## Tests
 

@@ -50,6 +50,13 @@ Expo SDK versions in `package.json` before relying on any API described here.
   needs its counterpart or a shared fallback.
 - **OTA updates:** a JS change shipped over the air must remain compatible with
   the native binary already installed.
+- **Release build:** the JS bundle is embedded (no Metro), usually compiled to
+  Hermes bytecode, `__DEV__` code is gone, and Android applies R8 to native
+  modules. When evidence-rules requires it: `npx react-native run-android
+  --mode release` / `run-ios --mode Release`, or `npx expo run:android
+  --variant release` / `run:ios --configuration Release`, or an EAS preview
+  build — verify the exact flags for the project's versions. Store
+  declarations follow `android.md` and `ios.md`.
 
 ## Tests and commands
 

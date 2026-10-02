@@ -47,7 +47,8 @@
 
 | Purpose | Command | Requires |
 | --- | --- | --- |
-| Build [platform] | | |
+| Build [platform] (debug) | | |
+| Build [platform] (release; minification on/off) | | |
 | Unit tests | | |
 | Lint / format | | |
 
